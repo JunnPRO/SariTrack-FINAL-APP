@@ -153,3 +153,38 @@ export const recordSale = function (data) {
   saveState();
   return sale;
 };
+
+// ---- Summary and History (Member 3) ----
+
+// Get total sales
+export const getTotalSales = function () {
+  return state.sales.reduce((total, sale) => total + sale.total, 0);
+};
+
+// Count transactions
+export const getTransactionCount = function () {
+  return state.sales.length;
+};
+
+// Get products with stock of 5 or below
+export const getLowStock = function () {
+  return state.products.filter(product => product.stock <= 5);
+};
+
+// Void a sale and restore stock
+export const voidSale = function (id) {
+  const sale = state.sales.find(s => s.id === Number(id));
+
+  if (!sale) return false;
+
+  const product = getProduct(sale.productId);
+
+  if (product) {
+    product.stock += sale.qty;
+  }
+
+  state.sales = state.sales.filter(s => s.id !== Number(id));
+
+  saveState();
+  return true;
+};

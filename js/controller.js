@@ -4,14 +4,33 @@
 import * as model from './model.js';
 import productView from './views/ProductView.js';
 import salesView from './views/SalesView.js';
+import summaryView from './views/SummaryView.js';
+import salesHistoryView from './views/SalesHistoryView.js';
 
 // Re-draws everything on the screen after any change.
 // Member 3: add the summary and history renders here.
+
+
 const refreshAll = function () {
   productView.render(model.state.products);
   salesView.render(model.state.products);
-  // keep the live total correct if a price or stock just changed
+
   controlSaleInput(salesView.getInput());
+
+  // Member 3
+  controlSummary();
+  salesHistoryView.render(model.state.sales);
+};
+
+
+ // ---- Summary and History (Member 3) ----
+
+const controlSummary = function () {
+  summaryView.render({
+    totalSales: model.getTotalSales(),
+    transactionCount: model.getTransactionCount(),
+    lowStock: model.getLowStock(),
+  });
 };
 
 // ---- Products (Member 1) ----
@@ -82,6 +101,14 @@ const controlRecordSale = function (formData) {
   salesView.clearForm();
 };
 
+const controlVoidSale = function (id) {
+  const success = model.voidSale(id);
+
+  if (success) {
+    refreshAll();
+  }
+};
+
 // Runs once when the page opens.
 const init = function () {
   model.loadState(); // restore saved data after a page reload
@@ -93,6 +120,7 @@ const init = function () {
   productView.addHandlerDelete(controlDeleteProduct); // [ADDED - Member 1]
   salesView.addHandlerInput(controlSaleInput); // [ADDED - Member 2]
   salesView.addHandlerSubmit(controlRecordSale); // [ADDED - Member 2]
+  salesHistoryView.addHandlerVoid(controlVoidSale); // [ADDED - Member 3]
   // Member 3 adds their handler lines here.
 };
 

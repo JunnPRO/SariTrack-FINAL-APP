@@ -1,5 +1,6 @@
 // PLACEHOLDER base View. Replace the contents with the Week 5 View class
 // from your course materials, then keep every view extending it.
+
 export default class View {
   _parentElement;
   _data;
@@ -17,5 +18,11 @@ export default class View {
 
   _generateMarkup() {
     return '';
+  }
+
+  _escape(text) {
+    const element = document.createElement('div');
+    element.textContent = text;
+    return element.innerHTML;
   }
 }
