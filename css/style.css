@@ -1,0 +1,54 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+.header {
+  background: #1f4e78;
+  color: #fff;
+  padding: 1.2rem 2rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 120px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Each member adds the styles for their own view below this line. */
+
+/* ---- Products (Member 1) ---- */
+.product-form { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0; }
+.product-form input { padding: 0.45rem; flex: 1 1 120px; }
+.product-form button { padding: 0.45rem 0.9rem; cursor: pointer; }
+.error { color: #b00020; font-size: 0.9rem; margin-bottom: 0.5rem; }
+.product-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+.product-item__meta { color: #666; font-size: 0.9rem; }
+.empty-message { color: #888; }
+
+/* [ADDED - Member 1] edit/delete buttons */
+.product-item { align-items: center; gap: 0.5rem; }
+.product-item__actions { display: flex; gap: 0.4rem; }
+.product-item__actions button, .btn-cancel { padding: 0.3rem 0.7rem; cursor: pointer; }
+
+/* ---- Sales (Member 2) ---- [ADDED] */
+.sales-form { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.75rem 0; }
+.sales-form select, .sales-form input { padding: 0.45rem; }
+.sales-form button { padding: 0.5rem; cursor: pointer; }
+.sale-total { font-size: 1.2rem; font-weight: bold; color: #1f4e78; }
+
+/* [ADDED - bug fix] edit-mode banner and highlight */
+.edit-banner { background: #fff4e5; border-left: 4px solid #e68a00; padding: 0.4rem 0.7rem; margin-top: 0.6rem; font-size: 0.9rem; }
+.product-form--editing { outline: 2px solid #e68a00; outline-offset: 4px; border-radius: 4px; }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SariTrack</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- type="module" is required so import/export works in the JS files -->
+    <script type="module" src="js/controller.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>SariTrack</h1>
+      <p>Sari-sari store sales and stock monitor</p>
+    </header>
+
+    <main class="layout">
+      <!-- Each view renders into its own parent element (Member names are examples) -->
+      <section class="panel product-panel">
+        <!-- ProductView (Member 1): the form is static, the list is rendered by the view -->
+        <h2>Products</h2>
+        <!-- [ADDED - bug fix] visible banner while editing, so it is clear you are not adding -->
+        <p class="edit-banner" hidden></p>
+        <form class="product-form" novalidate>
+          <!-- [ADDED - Member 1] hidden id: empty = add mode, filled = edit mode -->
+          <input type="hidden" name="id" />
+          <input type="text" name="name" placeholder="Product name" />
+          <input type="number" name="price" placeholder="Price (₱)" step="0.01" />
+          <input type="number" name="stock" placeholder="Stock" />
+          <button type="submit" class="btn-submit">Add product</button>
+          <!-- [ADDED - Member 1] shown only while editing -->
+          <button type="button" class="btn-cancel" hidden>Cancel</button>
+        </form>
+        <p class="product-error error" hidden></p>
+        <div class="product-list"></div>
+      </section>
+      <section class="panel sales-panel">
+        <!-- [ADDED - Member 2] sales form; the dropdown is rendered by SalesView -->
+        <h2>Record a sale</h2>
+        <form class="sales-form" novalidate>
+          <select name="productId" class="sales-product"></select>
+          <input type="number" name="qty" placeholder="Quantity" min="1" step="1" />
+          <p class="sale-total">Total: ₱0.00</p>
+          <button type="submit">Record sale</button>
+        </form>
+        <p class="sales-error error" hidden></p>
+      </section>
+      <section class="panel summary-panel"><!-- SummaryView (Member 3) --></section>
+      <section class="panel history-panel"><!-- SalesHistoryView (Member 3) --></section>
+    </main>
+  </body>
+</html>
