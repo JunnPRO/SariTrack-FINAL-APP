@@ -120,3 +120,4 @@ class ProductView extends View {
 }
 
 export default new ProductView();
+ 
