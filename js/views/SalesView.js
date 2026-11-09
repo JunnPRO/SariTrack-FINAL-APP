@@ -58,9 +58,10 @@ addHandlerInput(handler) {
   }
 
   clearForm() {
-    this._form.reset();
-    this.renderTotal(0);
-  }
+  this._form.reset();
+  this.renderTotal(0);
+  this.clearError();
+}
 
   _generateMarkup() {
     const options = this._data
