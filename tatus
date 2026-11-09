@@ -1,0 +1,11 @@
+[33mcommit 5e9fdaec3d2afbde0c64d0f3885ca19fab6285c2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmember2-sales-improvement[m[33m)[m
+Author: Maykyla <maykaylavillamero@gmail.com>
+Date:   Mon Nov 9 21:17:04 2026 +0800
+
+    Improve sales form reset behavior
+
+[33mcommit 3ef9cd1fcca57ed15907287de61d3ec00cbed836[m
+Author: Maykyla <maykaylavillamero@gmail.com>
+Date:   Mon Nov 9 21:08:59 2026 +0800
+
+    Improve sales error message handling

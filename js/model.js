@@ -111,8 +111,12 @@ export const deleteProduct = function (id) {
 export const calculateSaleTotal = function (productId, qty) {
   const product = getProduct(productId);
   const quantity = Number(qty);
-  if (!product || !Number.isFinite(quantity) || quantity <= 0) return 0;
-  return Math.round(product.price * quantity * 100) / 100; // avoid 0.1+0.2 issues
+
+  if (!product || !Number.isFinite(quantity) || quantity <= 0) {
+    return 0;
+  }
+
+  return Math.round(product.price * quantity * 100) / 100;
 };
 
 // [ADDED - Member 2] Checks a sale. Returns an error message, or '' if valid.
