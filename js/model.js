@@ -124,14 +124,23 @@ export const validateSale = function (data) {
   if (!data.productId) return 'Please choose a product.';
 
   const product = getProduct(data.productId);
+
   if (!product) return 'That product no longer exists.';
   if (product.stock === 0) return `${product.name} is out of stock.`;
 
-  if (String(data.qty ?? '').trim() === '') return 'Quantity is required.';
+  if (String(data.qty ?? '').trim() === '') {
+    return 'Quantity is required.';
+  }
+
   const qty = Number(data.qty);
-  if (!Number.isInteger(qty) || qty <= 0)
+
+  if (!Number.isInteger(qty) || qty <= 0) {
     return 'Quantity must be a whole number greater than 0.';
-  if (qty > product.stock) return `Only ${product.stock} left in stock.`;
+  }
+
+  if (qty > product.stock) {
+    return `Only ${product.stock} left in stock.`;
+  }
 
   return '';
 };
