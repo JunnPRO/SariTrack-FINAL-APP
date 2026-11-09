@@ -111,8 +111,12 @@ export const deleteProduct = function (id) {
 export const calculateSaleTotal = function (productId, qty) {
   const product = getProduct(productId);
   const quantity = Number(qty);
-  if (!product || !Number.isFinite(quantity) || quantity <= 0) return 0;
-  return Math.round(product.price * quantity * 100) / 100; // avoid 0.1+0.2 issues
+
+  if (!product || !Number.isFinite(quantity) || quantity <= 0) {
+    return 0;
+  }
+
+  return Math.round(product.price * quantity * 100) / 100;
 };
 
 // [ADDED - Member 2] Checks a sale. Returns an error message, or '' if valid.
@@ -120,14 +124,23 @@ export const validateSale = function (data) {
   if (!data.productId) return 'Please choose a product.';
 
   const product = getProduct(data.productId);
+
   if (!product) return 'That product no longer exists.';
   if (product.stock === 0) return `${product.name} is out of stock.`;
 
-  if (String(data.qty ?? '').trim() === '') return 'Quantity is required.';
+  if (String(data.qty ?? '').trim() === '') {
+    return 'Quantity is required.';
+  }
+
   const qty = Number(data.qty);
-  if (!Number.isInteger(qty) || qty <= 0)
+
+  if (!Number.isInteger(qty) || qty <= 0) {
     return 'Quantity must be a whole number greater than 0.';
-  if (qty > product.stock) return `Only ${product.stock} left in stock.`;
+  }
+
+  if (qty > product.stock) {
+    return `Only ${product.stock} left in stock.`;
+  }
 
   return '';
 };

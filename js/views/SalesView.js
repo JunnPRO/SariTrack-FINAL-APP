@@ -20,9 +20,13 @@ class SalesView extends View {
   }
 
   // The controller subscribes here; fires whenever the product or quantity changes.
-  addHandlerInput(handler) {
-    this._form.addEventListener('input', () => handler(this.getInput()));
-  }
+  
+addHandlerInput(handler) {
+  this._form.addEventListener('input', () => {
+    this.clearError();
+    handler(this.getInput());
+  });
+}
 
   addHandlerSubmit(handler) {
     this._form.addEventListener('submit', e => {
@@ -54,9 +58,10 @@ class SalesView extends View {
   }
 
   clearForm() {
-    this._form.reset();
-    this.renderTotal(0);
-  }
+  this._form.reset();
+  this.renderTotal(0);
+  this.clearError();
+}
 
   _generateMarkup() {
     const options = this._data
